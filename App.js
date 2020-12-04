@@ -1,64 +1,59 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View,Image,TouchableOpacity } from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './components/Home/Home';
+import InputMobileNumber from './components/InputMobileNumber/InputMobileNumber';
+import Otp from './components/Otp/Otp';
+import Profile from './components/Profile/Profile';
+import Service from './components/Service/Service';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function App() {
-
-  const logo = require('./assets/logo/logo.png');
+ 
+  const Stack = createStackNavigator();
+  
+  function LogoTitle() {
+    return (
+      <Image
+        style={{ width: 50, height: 50}}
+        source={require('./assets/logo/logo.png')}
+      />
+    );
+  }
 
   return (
-    <View style={styles.container}>
-      <Image
-            style={styles.logo}
-            source={logo}
-        />
-      <Text style={styles.homeScreenHeader}>Welcome to Owl Dhaka</Text>
-      <Text style={styles.homeScreenSubHeader}>Service for the Night Owls in the Dhaka City</Text>
-      <TouchableOpacity
-          style={styles.button}
-          activeOpacity = { .5 }>
-          <Text style={styles.ButtonTextStyle}> Get Started </Text>
-      </TouchableOpacity>
-
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, backgroundColor: '#000' }}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Service">
+              <Stack.Screen name="Home" component={Home} 
+              options={{ headerShown: false }} />
+              <Stack.Screen name="InputMobileNumber" component={InputMobileNumber}
+              options={{ headerShown: false }} />
+              <Stack.Screen name="Otp" component={Otp}
+              options={{ headerShown: false }} />
+              <Stack.Screen name="Profile" component={Profile}
+              options={{ headerShown: false }} />
+              <Stack.Screen name="Service" component={Service}
+              options={{
+                title:'',
+                headerStyle: {
+                  backgroundColor: '#000000',
+                },
+                headerLeft: () => (
+                  <Image
+                  style={{width: 50, height: 50, margin: 20}}
+                  source={require('./assets/logo/logo.png')}
+                  />
+              ),
+              headerRight: () =>(
+                <Icon name="bars" size={30} style={{margin: 20,color: '#fff'}}  />
+              ),
+              }} />
+          </Stack.Navigator>
+        </NavigationContainer>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  fontColor:{
-    color: '#ffffff',
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#141414',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  homeScreenHeader:{
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#ffffff',
-    top: '5%',
-  },
-  homeScreenSubHeader:{
-    top: '7%',
-    color: '#ffffff',
-  },
-  button: {
-    top: '10%',
-    backgroundColor: '#f7b614',
-    color: 'white',
-    borderRadius: 50,
-    padding: 10,
-  },
-  ButtonTextStyle:{
-    color:'#000',
-    textAlign:'center',
-    fontSize: 20,
-    fontWeight: 'bold'
-}
-  
-});
 
