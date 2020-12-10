@@ -57,7 +57,6 @@ function MainStackNavigator ({navigation}) {
               <Stack.Screen name="Billing" component={Billing}
               options={topBar} />
           </Stack.Navigator>
-
     </View>
   );
 }
