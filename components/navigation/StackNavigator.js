@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { StyleSheet, Text, View,Image,TouchableOpacity,Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'; 
@@ -12,12 +12,24 @@ import Resturants from '../Resturants/Resturants';
 import Items from '../Items/Items';
 import Cart from '../Cart/Cart';
 import Billing from '../Billing/Billing';
+import {isLogdin} from '../../Services/auth';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createStackNavigator();
 
 function MainStackNavigator ({navigation}) {
+  const [userToken, setUserToken] = useState(false);
+
+  useEffect(() => {
+    isLogdin().then((res)=>{
+      console.log('token ====== app.js '+res);
+      setUserToken(res); 
+    }).catch(err=>{
+      console.log(err);
+    })
+  });
+
   
   const topBar = {
     title:'',
@@ -37,15 +49,19 @@ function MainStackNavigator ({navigation}) {
  
   return (
     <View style={{ flex: 1, backgroundColor: '#000' }}>
-          <Stack.Navigator initialRouteName="Home">
-              <Stack.Screen name="Home" component={Home} 
-              options={{ headerShown: false }} />
-              <Stack.Screen name="InputMobileNumber" component={InputMobileNumber}
-              options={{ headerShown: false }} />
-              <Stack.Screen name="Otp" component={Otp}
-              options={{ headerShown: false }} />
-              <Stack.Screen name="Profile" component={Profile}
-              options={{ headerShown: false }} />
+          {userToken == false ? (
+            <Stack.Navigator>
+                <Stack.Screen name="Home" component={Home} 
+                options={{ headerShown: false }} />
+                <Stack.Screen name="InputMobileNumber" component={InputMobileNumber}
+                options={{ headerShown: false }} />
+                <Stack.Screen name="Otp" component={Otp}
+                options={{ headerShown: false }} />
+                <Stack.Screen name="Profile" component={Profile}
+                options={{ headerShown: false }} />
+            </Stack.Navigator>
+          ) : (
+            <Stack.Navigator>
               <Stack.Screen name="Service" component={Service}
               options={topBar} />
               <Stack.Screen name="Resturants" component={Resturants}
@@ -56,7 +72,9 @@ function MainStackNavigator ({navigation}) {
               options={topBar} />
               <Stack.Screen name="Billing" component={Billing}
               options={topBar} />
-          </Stack.Navigator>
+            </Stack.Navigator>
+             )}
+        
     </View>
   );
 }

@@ -1,9 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React,{useEffect} from 'react';
 import { StyleSheet, Text, View,Image,TouchableOpacity,TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {getToken,onSignIn} from '../../Services/auth';
 
 export default function Service({ navigation }){
+   useEffect(() => {
+      getToken().then((res)=>{
+        console.log('token ======'+res);
+      }).catch(err=>{
+        console.log(err);
+      })
+   });
+ 
+
   return (
     <View style={styles.container}>
        <View style={{ flex: 1, flexDirection: 'row', top: '20%',alignSelf: 'flex-start',paddingLeft: "3%"}}>
