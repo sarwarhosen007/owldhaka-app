@@ -5,6 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import Toast from 'react-native-simple-toast';
 import AuthService from '../../Services/AuthService'
 import {onSignIn} from '../../Services/auth';
+import Service from '../Service/Service';
 
 export default function Otp({ route,navigation }){
   const [submitted, setSubmitted] = useState(false);
@@ -28,8 +29,9 @@ export default function Otp({ route,navigation }){
             if (response.data.isTokenValid) {
               setSubmitted(true);
               if(response.data.isUserExist){
-                onSignIn(response.data.token);
-                navigation.navigate('Service',{phone:response.data.phone});
+                if (onSignIn(response.data.token)) {
+                  navigation.navigate('Service',{phone:response.data.phone}); 
+                }
               }else{
                 navigation.navigate('Profile',{phone:response.data.phone});
               }

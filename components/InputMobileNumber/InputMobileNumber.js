@@ -16,7 +16,7 @@ export default function InputMobileNumber({ navigation }){
 
   useEffect(() => {
     if (isVisible) {
-      console.log('loginout-----');
+      console.log('Input Mobile Number-----');
       onSignOut().then((res)=>{
         Toast.show('LogedOut Successfully!');
       }).catch(err=>{

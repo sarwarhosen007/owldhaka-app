@@ -22,6 +22,14 @@ export const getToken = async () => {
     }
 }
 
-export const onSignIn = async (token) => await SecureStore.setItemAsync('_bearerToken', JSON.stringify(token));
+export const onSignIn = async (token) => {
+
+     try {
+        await SecureStore.setItemAsync('_bearerToken', JSON.stringify(token));
+        return true;         
+     } catch (error) {
+        return false;
+     }
+}
 
 export const onSignOut = async () =>  SecureStore.deleteItemAsync('_bearerToken');

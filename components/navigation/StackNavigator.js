@@ -23,7 +23,7 @@ function MainStackNavigator ({navigation}) {
 
   useEffect(() => {
     isLogdin().then((res)=>{
-      console.log('token ====== app.js '+res);
+      console.log('token In StackNavigation ====== app.js '+res);
       setUserToken(res); 
     }).catch(err=>{
       console.log(err);
