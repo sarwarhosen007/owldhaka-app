@@ -8,11 +8,10 @@ export default function Logout({ route,navigation }){
 
   const [userToken, setUserToken] = useState(false);
   useEffect(() => {
-    isLogdin().then((res)=>{
-      console.log('token In LogOut ====== app.js '+res);
-      setUserToken(res); 
+    onSignOut().then((res)=>{
+      console.log('LogOut ====== logout.js '+res);
       if (res) {
-        onSignOut();
+        navigation.navigate('Home');
       }
     }).catch(err=>{
       console.log(err);

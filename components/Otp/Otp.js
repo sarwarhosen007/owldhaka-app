@@ -29,9 +29,10 @@ export default function Otp({ route,navigation }){
             if (response.data.isTokenValid) {
               setSubmitted(true);
               if(response.data.isUserExist){
-                if (onSignIn(response.data.token)) {
-                  navigation.navigate('Service',{phone:response.data.phone}); 
-                }
+                console.log(onSignIn("After Otp "+response.data.token));
+                // if (onSignIn(response.data.token)) {
+                //   navigation.navigate('Service',{phone:response.data.phone}); 
+                // }
               }else{
                 navigation.navigate('Profile',{phone:response.data.phone});
               }
@@ -40,7 +41,7 @@ export default function Otp({ route,navigation }){
             }
          })
          .catch(error =>{
-           console.log(error);
+           console.log("All Errors "+error);
          });
      };
   

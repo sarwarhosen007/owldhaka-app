@@ -25,6 +25,7 @@ export const getToken = async () => {
 export const onSignIn = async (token) => {
 
      try {
+         console.log("When Loging "+token);
         await SecureStore.setItemAsync('_bearerToken', JSON.stringify(token));
         return true;         
      } catch (error) {
@@ -32,4 +33,13 @@ export const onSignIn = async (token) => {
      }
 }
 
-export const onSignOut = async () =>  SecureStore.deleteItemAsync('_bearerToken');
+export const onSignOut = async () => {
+    try {
+        SecureStore.deleteItemAsync('_bearerToken');
+        return true;
+    } catch (error) {
+        return false;
+     } 
+
+} 
+
