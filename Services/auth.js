@@ -25,7 +25,6 @@ export const getToken = async () => {
 export const onSignIn = async (token) => {
 
      try {
-         console.log("When Loging "+token);
         await SecureStore.setItemAsync('_bearerToken', JSON.stringify(token));
         return true;         
      } catch (error) {

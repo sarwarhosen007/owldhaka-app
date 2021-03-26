@@ -49,7 +49,7 @@ function MainStackNavigator ({navigation}) {
  
   return (
     <View style={{ flex: 1, backgroundColor: '#000' }}>
-          {userToken == false ? (
+        
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={Home} 
                 options={{ headerShown: false }} />
@@ -59,10 +59,7 @@ function MainStackNavigator ({navigation}) {
                 options={{ headerShown: false }} />
                 <Stack.Screen name="Profile" component={Profile}
                 options={{ headerShown: false }} />
-            </Stack.Navigator>
-          ) : (
-            <Stack.Navigator>
-              <Stack.Screen name="Service" component={Service}
+                <Stack.Screen name="Service" component={Service}
               options={topBar} />
               <Stack.Screen name="Resturants" component={Resturants}
               options={topBar} />
@@ -72,8 +69,9 @@ function MainStackNavigator ({navigation}) {
               options={topBar} />
               <Stack.Screen name="Billing" component={Billing}
               options={topBar} />
+
             </Stack.Navigator>
-             )}
+        
         
     </View>
   );
