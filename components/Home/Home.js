@@ -17,7 +17,7 @@ export default function Home({ navigation }){
       <TouchableOpacity
           style={styles.button}
           activeOpacity = { .5 }>
-          <Text style={styles.ButtonTextStyle} onPress={() => navigation.navigate('InputMobileNumber')}> Get Started </Text>
+          <Text style={styles.ButtonTextStyle} onPress={() => navigation.navigate('Service')}> Get Started </Text>
       </TouchableOpacity>
 
       <StatusBar style="auto" />

@@ -38,8 +38,10 @@ export default function InputMobileNumber({ navigation }){
        var data = {
          phone: data.phone,
        };
+       
        await AuthService.sendOtp(data)
          .then(response =>{
+            console.log(response.data);
             if (response.data.otp) {
               navigation.navigate('Otp',{returnOtp:JSON.parse(response.data.otp),phone:data.phone});
               setSubmitted(true);
@@ -48,7 +50,7 @@ export default function InputMobileNumber({ navigation }){
             }
          })
          .catch(error =>{
-           console.log(error);
+           console.log(MSMediaKeyError);
          });
      };
   

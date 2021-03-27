@@ -1,57 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, ScrollView,Text, View,Image,TouchableOpacity,TextInput } from 'react-native';
- 
-export default function Resturants({ navigation }){
+import React,{useEffect} from 'react';
+import { StyleSheet, Text, View,Image,TouchableOpacity,TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import {getRestaurantList} from '../../Services/ResturantService';
 
-  const haziLogo = require('../../assets/resturants/hazi.png');
+export default function Resturants({ navigation }){
+   useEffect(() => {
+    getRestaurantList().then((res)=>{
+        console.log(response.data);
+      }).catch(err=>{
+        console.log(err);
+      })
+   });
+ 
 
   return (
     <View style={styles.container}>
-        <ScrollView contentContainerStyle={{ paddingBottom: '50%' }} >
-            <View style={{top: "3%"}}>
-                <View> 
-                    <TouchableOpacity  style={styles.singleResturantStyle} onPress={() => navigation.navigate('Items')}>
-                        <Image
-                            style={styles.logo}
-                            source={haziLogo}
-                        />
-                        <Text style={styles.resturantTitle}>Hazi Biriyani</Text>
-                        <Text style={styles.resturantsubHeader}>The traditional Hazi Biryani which is very popular forit's delicious smell and bla bla bla</Text>
-                    </TouchableOpacity >
-                </View>
-                <View style={{top: "3%"}}>
-                    <TouchableOpacity  style={styles.singleResturantStyle} onPress={() => navigation.navigate('Items')}>
-                        <Image
-                            style={styles.logo}
-                            source={haziLogo}
-                        />
-                        <Text style={styles.resturantTitle}>Bismillah Kebab Ghor</Text>
-                        <Text style={styles.resturantsubHeader}>The traditional Hazi Biryani which is very popular forit's delicious smell and bla bla bla</Text>
-                    </TouchableOpacity >
-                </View>
-                <View style={{top: "6%"}}>
-                    <TouchableOpacity  style={styles.singleResturantStyle} onPress={() => navigation.navigate('Items')}>
-                        <Image
-                            style={styles.logo}
-                            source={haziLogo}
-                        />
-                        <Text style={styles.resturantTitle}>Hazi Biriyani 3</Text>
-                        <Text style={styles.resturantsubHeader}>The traditional Hazi Biryani which is very popular forit's delicious smell and bla bla bla</Text>
-                    </TouchableOpacity >
-                </View>
-                <View style={{top: "9%"}}>
-                    <TouchableOpacity  style={styles.singleResturantStyle} onPress={() => navigation.navigate('Items')}>
-                        <Image
-                            style={styles.logo}
-                            source={haziLogo}
-                        />
-                        <Text style={styles.resturantTitle}>Hazi Biriyani 4</Text>
-                        <Text style={styles.resturantsubHeader}>The traditional Hazi Biryani which is very popular forit's delicious smell and bla bla bla</Text>
-                    </TouchableOpacity >
-                </View>
-            </View>
-        </ScrollView>
+       <View style={{ flex: 1, flexDirection: 'row', top: '20%',alignSelf: 'flex-start',paddingLeft: "3%"}}>
+            <TouchableOpacity  style={styles.singleServiceStyle} 
+            onPress={() => navigation.navigate('Resturants')}>
+                <Text style={styles.profileScreenTitle}>Haji Biriyani</Text>
+            </TouchableOpacity >
+            <TouchableOpacity style={styles.singleServiceStyle}>
+                <Text style={styles.profileScreenTitle}>Mamun Biriyani House</Text>
+            </TouchableOpacity>
+        </View>
+        <View style={{flex: 2.5, flexDirection: 'row', alignSelf: 'flex-start',paddingLeft: "3%"}}>
+            <TouchableOpacity style={styles.singleServiceStyle}>
+                <Text style={styles.profileScreenTitle}>Bismillah Kebab Ghor</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.singleServiceStyle}>
+                <Text style={styles.profileScreenTitle}>BhuKahri Restora</Text>
+            </TouchableOpacity>
+        </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -62,29 +43,27 @@ const styles = StyleSheet.create({
       color: '#ffffff',
     },
     container: {
-        flex: 1,
-        backgroundColor: '#141414',
-        alignItems: 'center',
-         
-      },
-      resturantTitle:{
-        fontSize: 28,
-        color: '#FECE61',
-        bottom: 20,
-        textAlign: 'center', 
-        top: '5%'
+      flex: 1,
+      backgroundColor: '#141414',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
-    singleResturantStyle:{
-        width: '100%', 
-        padding: '8%',
-        backgroundColor: '#1C201E',
-    
-    },
-    resturantsubHeader:{
-        top: '7%',
+    profileScreenTitle:{
+        fontSize: 20,
         color: '#ffffff',
         textAlign: 'center', 
-      },
+        paddingTop: 30
+    },
+    singleServiceStyle:{
+        position: 'relative',
+        width: '45%',
+        backgroundColor: '#232222',
+        height: 100,
+        borderRadius: 20,
+        margin:5,
+         
+    },
      
+
   });
   
